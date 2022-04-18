@@ -5,6 +5,7 @@ from sys import exit
 from os import environ
 
 ifttt_api_key = environ.get('IFTTT_KEY')
+if ifttt_api_key == None: print("API env var not set"); exit()
 
 ### Img URLs defined here ###
 statuses = {
