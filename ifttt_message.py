@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+import argparse
+import requests
+from sys import exit
+from os import environ
+
+ifttt_api_key = environ.get('IFTTT_KEY')
+
+### Img URLs defined here ###
+statuses = {
+    "message": "https://www.iconsdb.com/icons/preview/black/message-2-xxl.png",
+    "info": "https://img.icons8.com/pastel-glyph/2x/info.png",
+    "error": "https://iconsplace.com/wp-content/uploads/_icons/ff0000/256/png/error-icon-14-256.png",
+    "webserver-dosattack": "https://i.ibb.co/bLsbryD/hack-icon.png",
+    "weatherstation-error": "https://i.ibb.co/ftJLCrs/30262987-1-Cropped-adobespark.png",
+    "weatherstation-success": "https://i.ibb.co/ncr7cGT/cute-blue-cloud-icon-isolated-260nw-1411271507-Cropped-adobespark.png",
+    "ups-powerloss": "https://i.ibb.co/cFvNbMj/power-loss.png",
+    "ups-powerrestored": "https://i.ibb.co/XsHKPV3/power-restored.png"
+}
+
+### Def values for args ###
+defaults = {"title": "Test Message", "message": "Hello World!", "status": "message"}
+
+### Init command line arguments ###
+parser = argparse.ArgumentParser(description="Sends messages to my iPhone via the IFTTT app")
+parser.add_argument("-t", "--title")
+parser.add_argument("-m", "--message")
+parser.add_argument("-s", "--status")
+args = parser.parse_args()
+
+### Add defualt args ###
+newargs = {}
+for arg in vars(args):
+    if not getattr(args, arg):
+        newargs[arg] = defaults[arg]
+    else:
+        newargs[arg] = getattr(args, arg)
+if newargs["status"] not in statuses.keys():
+    print("Not a valid status.")
+    exit(1)
+newargs["imageurl"] = statuses[newargs["status"]]
+newargs.pop("status")
+
+### Payload init ###
+payload = {}
+vals = list(newargs.values())
+for i in range(len(vals)):
+    payload[f"value{i + 1}"] = vals[i]
+
+### Request with JSON payload ###
+try:
+    r = requests.get(f"https://maker.ifttt.com/trigger/message_recieved/with/key/{ifttt_api_key}", params=payload)
+except Exception:
+    print("Request failed - connectivity issues?")
