@@ -5,5 +5,5 @@ read -p "Do you wish to continue> " REPLY
 if [ "$REPLY" != "y" ]; then
    exit
 fi
-ln -s /home/$USER/bin/ifttt_message /home/$USER/ifttt_message/ifttt_message
+ln -s /home/$USER/ifttt_message/ifttt_message /home/$USER/bin/ifttt_message
 
