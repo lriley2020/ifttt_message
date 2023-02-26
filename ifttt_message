@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 import argparse
 import requests
-from sys import exit
-from os import environ
+import sys
+from os import path
 
-ifttt_api_key = environ.get('IFTTT_KEY')
-if ifttt_api_key == None: print("API env var not set"); exit()
+try:
+    with open(path.join(sys.path[0], "ifttt_key"), "r") as f:
+        ifttt_api_key = f.readline()
+except Exception:
+    raise SystemExit("Failed to import IFTTT API key. API key file is missing / insufficient permissions")
 
 ### Img URLs defined here ###
 statuses = {
@@ -37,8 +40,7 @@ for arg in vars(args):
     else:
         newargs[arg] = getattr(args, arg)
 if newargs["status"] not in statuses.keys():
-    print("Not a valid status.")
-    exit(1)
+    raise SystemExit("Not a valid status.")
 newargs["imageurl"] = statuses[newargs["status"]]
 newargs.pop("status")
 
@@ -52,4 +54,4 @@ for i in range(len(vals)):
 try:
     r = requests.get(f"https://maker.ifttt.com/trigger/message_recieved/with/key/{ifttt_api_key}", params=payload)
 except Exception:
-    print("Request failed - connectivity issues?")
+    raise SystemExit("Request failed - connectivity issues?")
