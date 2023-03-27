@@ -19,7 +19,8 @@ statuses = {
     "weatherstation-error": "https://i.ibb.co/ftJLCrs/30262987-1-Cropped-adobespark.png",
     "weatherstation-success": "https://i.ibb.co/ncr7cGT/cute-blue-cloud-icon-isolated-260nw-1411271507-Cropped-adobespark.png",
     "ups-powerloss": "https://i.ibb.co/cFvNbMj/power-loss.png",
-    "ups-powerrestored": "https://i.ibb.co/XsHKPV3/power-restored.png"
+    "ups-powerrestored": "https://i.ibb.co/XsHKPV3/power-restored.png",
+    "backup-started": "https://cdn-icons-png.flaticon.com/512/2970/2970590.png",
 }
 
 ### Def values for args ###
