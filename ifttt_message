@@ -14,6 +14,7 @@ except Exception:
 statuses = {
     "message": "https://www.iconsdb.com/icons/preview/black/message-2-xxl.png",
     "info": "https://img.icons8.com/pastel-glyph/2x/info.png",
+    "warning": "https://www.citypng.com/public/uploads/preview/png-orange-error-warning-icon-11639742699bjl3rmwkvw.png",
     "error": "https://iconsplace.com/wp-content/uploads/_icons/ff0000/256/png/error-icon-14-256.png",
     "webserver-dosattack": "https://i.ibb.co/bLsbryD/hack-icon.png",
     "weatherstation-error": "https://i.ibb.co/ftJLCrs/30262987-1-Cropped-adobespark.png",
